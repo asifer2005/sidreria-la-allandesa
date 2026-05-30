@@ -9,6 +9,13 @@
   <meta property="og:title" content="Sidrería La Allandesa · Gijón" />
   <meta property="og:description" content="Cocina asturiana de verdad. Cachopo, pulpo, pescados del Cantábrico y menú del día 14€." />
   <meta property="og:locale" content="es_ES" />
+  <!-- og:image: URL absoluta. El dominio DEBE coincidir con el despliegue real en Netlify. Si cambia el dominio del sitio, actualiza también esta URL. -->
+  <meta property="og:image" content="https://laallandesa.netlify.app/fotos/local.jpg" />
+  <meta property="og:url" content="https://laallandesa.netlify.app/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sidrería La Allandesa · Gijón" />
+  <meta name="twitter:description" content="Cocina asturiana de verdad. Cachopo, pulpo, pescados del Cantábrico y menú del día 14€." />
+  <meta name="twitter:image" content="https://laallandesa.netlify.app/fotos/local.jpg" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍺</text></svg>" />
 
   <script type="application/ld+json">
@@ -283,16 +290,13 @@
     .caja-reserva { background: var(--white); padding: 3rem; opacity: 0; transform: translateX(24px); }
     .caja-reserva .titulo { font-size: 2rem; }
     .caja-reserva > p { font-size: .88rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.65; }
-    .campo { margin-bottom: 1rem; }
-    .campo label { display: block; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: .4rem; }
-    .campo input, .campo select, .campo textarea { width: 100%; background: var(--cream); border: 1.5px solid rgba(26,20,8,.12); color: var(--text); padding: .8rem 1rem; font-size: .88rem; font-family: 'Nunito', sans-serif; outline: none; transition: border-color .25s; }
-    .campo input:focus, .campo select:focus, .campo textarea:focus { border-color: var(--amber); }
-    .campo select option { background: var(--white); }
-    .fila-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    /* FIX #15 — feedback de formulario */
-    .form-ok { display: none; padding: .8rem 1rem; background: rgba(27,52,16,.08); color: var(--green); font-size: .82rem; font-weight: 600; text-align: center; margin-bottom: .8rem; border: 1px solid rgba(27,52,16,.15); }
-    .btn-enviar { width: 100%; background: var(--green); color: var(--cream); border: none; padding: 1rem; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; cursor: pointer; font-family: 'Nunito', sans-serif; transition: background .25s, transform .2s; margin-top: .4rem; }
-    .btn-enviar:hover { background: var(--green-2); transform: translateY(-1px); }
+    /* Reserva por teléfono — CTA principal "Llamar ahora" */
+    .btn-llamar { display: flex; align-items: center; justify-content: center; width: 100%; background: var(--green); color: var(--cream); padding: 1.1rem; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; font-weight: 700; font-family: 'Nunito', sans-serif; transition: background .25s, transform .2s; }
+    .btn-llamar:hover { background: var(--green-2); transform: translateY(-1px); }
+    .reserva-detalles { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.1rem; }
+    .reserva-dato { border-left: 3px solid var(--amber); padding-left: 1rem; }
+    .reserva-dato-label { display: block; font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: .15rem; }
+    .reserva-dato-valor { display: block; font-size: .88rem; color: var(--text); }
 
     /* ─── MAPA ─── */
     #mapa { padding: 0; height: 420px; position: relative; overflow: hidden; }
@@ -340,7 +344,6 @@
       .carta-subtitulo { text-align: left; }
     }
     @media (max-width: 600px) {
-      .fila-2 { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
       .galeria-grid { grid-template-columns: 1fr; }
       .gfoto { height: 200px; }
@@ -722,31 +725,21 @@
       </div>
     </div>
 
+    <!-- Reserva por teléfono. El local NO dispone de WhatsApp: la acción principal es LLAMAR. -->
     <div class="caja-reserva" data-reveal="right">
       <h3 class="titulo">Reserva<br>tu mesa.</h3>
-      <p>Te mandamos la solicitud por WhatsApp. También puedes llamar directamente al <strong style="color:var(--amber)">985 62 26 67</strong>.</p>
-      <form onsubmit="enviarWA(event)">
-        <div class="fila-2">
-          <div class="campo"><label for="f-nombre">Nombre</label><input id="f-nombre" type="text" placeholder="Tu nombre" required /></div>
-          <div class="campo"><label for="f-tel">Teléfono</label><input id="f-tel" type="tel" placeholder="666 000 000" required /></div>
+      <p>Las reservas se hacen por teléfono. Llámanos y te confirmamos la mesa al momento — te decimos también el menú del día de hoy.</p>
+      <a href="tel:985622667" class="btn-llamar">📞&nbsp; Llamar ahora · 985 62 26 67</a>
+      <div class="reserva-detalles">
+        <div class="reserva-dato">
+          <span class="reserva-dato-label">Horario de cocina</span>
+          <span class="reserva-dato-valor">Todos los días excepto martes</span>
         </div>
-        <div class="fila-2">
-          <div class="campo"><label for="f-fecha">Fecha</label><input id="f-fecha" type="date" required /></div>
-          <div class="campo">
-            <label for="f-personas">Comensales</label>
-            <select id="f-personas" required>
-              <option value="">Seleccionar</option>
-              <option>1 persona</option><option>2 personas</option><option>3 personas</option>
-              <option>4 personas</option><option>5 personas</option><option>6 personas</option>
-              <option>Más de 6 (grupo)</option>
-            </select>
-          </div>
+        <div class="reserva-dato">
+          <span class="reserva-dato-label">Grupos grandes</span>
+          <span class="reserva-dato-valor">Avísanos por teléfono con antelación</span>
         </div>
-        <div class="campo"><label for="f-nota">Nota (opcional)</label><textarea id="f-nota" rows="2" placeholder="Menú del día, alergias, celebración…"></textarea></div>
-        <!-- FIX #15 — feedback de formulario -->
-        <div class="form-ok" id="form-ok">✓ Solicitud enviada — te confirmamos la reserva pronto</div>
-        <button type="submit" class="btn-enviar">Enviar por WhatsApp</button>
-      </form>
+      </div>
     </div>
   </section>
 
@@ -790,7 +783,7 @@
     </div>
     <div class="footer-bottom">
       <p>© 2026 Sidrería La Allandesa · Gijón, Asturias</p>
-      <p>Diseño web profesional</p>
+      <p>Cocina asturiana · Gijón-Oeste</p>
     </div>
   </footer>
 
@@ -960,31 +953,6 @@
       document.body.style.overflow = '';
     }
 
-    // ── Formulario → WhatsApp + FIX #15 feedback
-    function enviarWA(e) {
-      e.preventDefault();
-      const f = e.target;
-      const nombre   = document.getElementById('f-nombre').value.trim();
-      const tel      = document.getElementById('f-tel').value.trim();
-      const fecha    = document.getElementById('f-fecha').value;
-      const personas = document.getElementById('f-personas').value;
-      const nota     = document.getElementById('f-nota').value.trim();
-      const fechaFmt = fecha
-        ? new Date(fecha + 'T00:00:00').toLocaleDateString('es-ES', { weekday:'long', day:'numeric', month:'long' })
-        : '';
-      let msg = `Hola, quiero reservar en La Allandesa:\n\n👤 ${nombre}\n📞 ${tel}\n📅 ${fechaFmt}\n👥 ${personas}`;
-      if (nota) msg += `\n💬 ${nota}`;
-      msg += '\n\nGracias!';
-      window.open('https://wa.me/34985622667?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
-      f.reset();
-      const fb = document.getElementById('form-ok');
-      fb.style.display = 'block';
-      setTimeout(() => { fb.style.display = 'none'; }, 5000);
-    }
-
-    // ── Fecha mínima = hoy
-    const di = document.getElementById('f-fecha');
-    if (di) di.min = new Date().toISOString().split('T')[0];
   </script>
 </body>
 </html>
