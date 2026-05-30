@@ -1,0 +1,7 @@
+﻿# Sistema / editor
+Thumbs.db
+.DS_Store
+*.log
+
+# Dependencias (nunca subir a git)
+node_modules/

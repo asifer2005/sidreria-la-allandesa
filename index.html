@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sidrería La Allandesa · Restaurante asturiano en Gijón</title>
+  <meta name="description" content="Sidrería La Allandesa en Gijón. Cachopo, pulpo a la brasa, pote asturiano y menú del día desde 14€. Valoración 4,6 ⭐ con 1.334 opiniones. Calle Luis Braille, 28. Tel: 985 62 26 67." />
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:title" content="Sidrería La Allandesa · Gijón" />
+  <meta property="og:description" content="Cocina asturiana de verdad. Cachopo, pulpo, pescados del Cantábrico y menú del día 14€." />
+  <meta property="og:locale" content="es_ES" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍺</text></svg>" />
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Restaurant","name":"Sidrería La Allandesa","address":{"@type":"PostalAddress","streetAddress":"Calle Luis Braille, 28","addressLocality":"Gijón","addressRegion":"Asturias","postalCode":"33212","addressCountry":"ES"},"telephone":"+34985622667","servesCuisine":"Cocina asturiana","priceRange":"€€","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.6","reviewCount":"1334","bestRating":"5"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday"],"opens":"11:00","closes":"16:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Wednesday","Thursday","Friday"],"opens":"11:00","closes":"16:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Wednesday","Thursday","Friday"],"opens":"19:00","closes":"01:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday","Sunday"],"opens":"11:00","closes":"01:00"}]}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:    #f4edd8;
+      --cream-2:  #ede3c8;
+      --green:    #1b3410;
+      --green-2:  #2a4e1a;
+      --amber:    #b87018;
+      --amber-lt: #d49030;
+      --text:     #1a1408;
+      --muted:    #7a6848;
+      --white:    #fdf9f1;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    /* FIX #18 — focus-visible para navegación por teclado */
+    :focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 3px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* FIX #13 — espacio para la barra sticky móvil */
+    @media (max-width: 960px) { body { padding-bottom: 54px; } }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--amber); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid rgba(26,20,8,.08);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 4vw;
+      transition: box-shadow .3s;
+    }
+    nav.raised { box-shadow: 0 2px 20px rgba(26,20,8,.1); }
+    .nav-logo { text-decoration: none; display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-name { font-family: 'Lora', serif; font-size: 1.1rem; font-weight: 600; color: var(--green); letter-spacing: .03em; }
+    .nav-logo-tag  { font-size: .58rem; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text); text-decoration: none; font-size: .78rem;
+      letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+      transition: color .25s;
+    }
+    /* FIX #16 — active state en nav */
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--amber); }
+    .nav-tel {
+      display: flex; align-items: center; gap: .5rem;
+      background: var(--green); color: var(--cream);
+      padding: .55rem 1.4rem; font-size: .72rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none; font-weight: 600;
+      transition: background .25s;
+    }
+    .nav-tel:hover { background: var(--green-2); }
+
+    /* hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: .4rem; z-index: 200;
+    }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--green); transition: transform .3s, opacity .3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mob-menu {
+      display: none; position: fixed; inset: 0;
+      background: var(--white); z-index: 150;
+      flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    }
+    .mob-menu.open { display: flex; }
+    .mob-menu ul { list-style: none; text-align: center; }
+    .mob-menu ul li { margin-bottom: 1.6rem; }
+    .mob-menu ul li a { font-family: 'Abril Fatface', serif; font-size: 2.2rem; color: var(--green); text-decoration: none; transition: color .25s; }
+    .mob-menu ul li a:hover { color: var(--amber); }
+    .mob-tel { background: var(--green); color: var(--cream); padding: .9rem 2.5rem; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; font-weight: 600; }
+
+    /* FIX #13 — barra de llamada fija en móvil */
+    .sticky-call { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; }
+    .sticky-call a {
+      display: flex; align-items: center; justify-content: center; gap: .6rem;
+      background: var(--green); color: var(--cream);
+      padding: 1rem; width: 100%; text-decoration: none;
+      font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 700;
+    }
+    @media (max-width: 960px) { .sticky-call { display: block; } }
+
+    /* ─── HERO ─── */
+    #hero {
+      display: grid;
+      grid-template-columns: 45fr 55fr;
+      min-height: 100vh;
+      padding-top: 65px;
+    }
+    .hero-left {
+      background: var(--cream);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: clamp(2.5rem, 5vw, 5rem) clamp(2rem, 4vw, 5rem);
+    }
+    .hero-location { font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.8rem; opacity: 0; transform: translateX(-20px); }
+    .hero-name { font-family: 'Abril Fatface', serif; font-size: clamp(3.5rem, 7vw, 6.5rem); color: var(--green); line-height: .92; margin-bottom: 2rem; opacity: 0; transform: translateX(-24px); }
+    .hero-name span { display: block; color: var(--amber); }
+    .hero-desc { font-size: .95rem; line-height: 1.75; color: var(--muted); margin-bottom: 2.5rem; max-width: 340px; opacity: 0; transform: translateX(-20px); }
+    .hero-score { display: flex; align-items: center; gap: .6rem; margin-bottom: 2.5rem; opacity: 0; transform: translateX(-20px); }
+    .hero-score .stars { color: var(--amber); font-size: 1rem; }
+    .hero-score .num { font-family: 'Lora', serif; font-size: 1.3rem; font-weight: 600; color: var(--green); }
+    .hero-score .cnt { font-size: .75rem; color: var(--muted); }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; transform: translateX(-20px); }
+
+    /* FIX #9 — hero-right como contenedor de <img> */
+    .hero-right { position: relative; overflow: hidden; min-height: 500px; }
+    .hero-right img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-right::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(244,237,216,.25) 0%, transparent 30%);
+      z-index: 1;
+    }
+
+    .btn-dark { background: var(--green); color: var(--cream); padding: .85rem 2rem; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; font-weight: 600; font-family: 'Nunito', sans-serif; transition: background .25s, transform .2s; display: inline-block; }
+    .btn-dark:hover { background: var(--green-2); transform: translateY(-1px); }
+    .btn-border { border: 1.5px solid var(--green); color: var(--green); padding: .85rem 2rem; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; font-weight: 600; transition: background .25s, color .25s, transform .2s; display: inline-block; }
+    .btn-border:hover { background: var(--green); color: var(--cream); transform: translateY(-1px); }
+
+    /* ─── FRANJA INFO ─── */
+    #franja { background: var(--green); display: flex; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .franja-item { flex: 1; min-width: 160px; padding: 1.8rem 2rem; text-align: center; border-right: 1px solid rgba(253,249,241,.1); opacity: 0; transform: translateY(16px); }
+    .franja-item:last-child { border-right: none; }
+    .franja-num { font-family: 'Abril Fatface', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); color: var(--amber-lt); line-height: 1; margin-bottom: .2rem; }
+    .franja-label { font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(253,249,241,.45); }
+
+    /* ─── SECCIÓN BASE ─── */
+    .sec { padding: clamp(4rem, 8vw, 8rem) 4vw; }
+    .eyebrow { font-size: .64rem; letter-spacing: .3em; text-transform: uppercase; color: var(--amber); margin-bottom: .9rem; display: block; }
+    /* FIX #12 — eliminar inline styles moviendo overrides a CSS */
+    #menu-dia .eyebrow { color: rgba(255,255,255,.7); }
+    #contacto .eyebrow { color: rgba(212,144,48,.85); }
+    .titulo { font-family: 'Abril Fatface', serif; font-size: clamp(2rem, 4.5vw, 3.5rem); color: var(--green); line-height: 1.05; margin-bottom: 1.4rem; }
+    .titulo-claro { color: var(--cream); }
+    #menu-dia .titulo { color: var(--white); margin-bottom: .6rem; }
+    #contacto .titulo { margin-bottom: 2rem; }
+    .trazo { width: 36px; height: 3px; background: var(--amber); margin-bottom: 2rem; }
+
+    /* ─── NOSOTROS ─── */
+    #nosotros { background: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; align-items: center; }
+    .nos-texto p { font-size: 1rem; line-height: 1.85; color: var(--muted); margin-bottom: 1.3rem; }
+    .nos-tags { margin-top: .5rem; }
+    .etiqueta { display: inline-block; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--green); border: 1.5px solid rgba(27,52,16,.25); padding: .38rem .9rem; margin: .25rem .25rem 0 0; font-weight: 600; }
+    .nos-foto { overflow: hidden; aspect-ratio: 4/5; }
+    .nos-foto img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s ease; }
+    .nos-foto:hover img { transform: scale(1.03); }
+
+    /* ─── CARTA ─── */
+    #carta { background: var(--green); }
+    /* FIX #2 — eliminado flex-wrap en grid container */
+    .carta-header { display: grid; grid-template-columns: 1fr auto; align-items: end; margin-bottom: 4rem; gap: 1rem; }
+    .carta-header .eyebrow { color: rgba(212,144,48,.8); }
+    .carta-header .titulo { color: var(--amber-lt); margin-bottom: 0; }
+    .carta-subtitulo { font-size: .8rem; color: rgba(253,249,241,.4); text-align: right; }
+    .carta-categoria { margin-bottom: 3rem; opacity: 0; transform: translateX(-28px); }
+    .cat-nombre { font-size: .65rem; letter-spacing: .3em; text-transform: uppercase; color: var(--amber); padding-bottom: .8rem; border-bottom: 1px solid rgba(212,144,48,.2); margin-bottom: 1.2rem; display: block; }
+    /* FIX #4 — eliminada columna fantasma, ahora solo 1fr */
+    .plato-linea { padding: .7rem 0; border-bottom: 1px solid rgba(253,249,241,.06); }
+    .plato-linea:last-child { border-bottom: none; }
+    .plato-info { display: flex; flex-direction: column; gap: .15rem; }
+    .plato-nombre { font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 600; color: var(--white); }
+    .plato-nombre.star::after { content: ' ★'; color: var(--amber); font-family: 'Nunito', sans-serif; font-size: .75rem; }
+    /* FIX #17 — contraste de detalle subido de .4 a .65 */
+    .plato-detalle { font-size: .8rem; color: rgba(253,249,241,.65); font-style: italic; font-family: 'Lora', serif; }
+
+    /* ─── MENÚ DEL DÍA ─── */
+    #menu-dia { background: var(--amber); }
+    .menu-dia-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+    #menu-dia p { color: rgba(255,255,255,.8); font-size: .95rem; line-height: 1.7; max-width: 480px; }
+    .precio-grande { text-align: center; flex-shrink: 0; }
+    .precio-num { font-family: 'Abril Fatface', serif; font-size: 5rem; color: var(--white); line-height: 1; }
+    .precio-label { font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.65); }
+    .btn-blanco { background: var(--white); color: var(--amber); padding: .85rem 2rem; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; font-weight: 700; font-family: 'Nunito', sans-serif; transition: background .25s, transform .2s; display: inline-block; margin-top: 1.5rem; }
+    .btn-blanco:hover { background: var(--cream); transform: translateY(-1px); }
+
+    /* ─── GALERÍA ─── */
+    #galeria { background: var(--cream-2); }
+    .galeria-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 280px 280px; gap: 3px; }
+    /* FIX #14 — cursor pointer para indicar que se puede clicar */
+    .gfoto { overflow: hidden; position: relative; cursor: pointer; }
+    .gfoto:nth-child(1) { grid-column: 1 / 3; }
+    .gfoto:nth-child(5) { grid-column: 2 / 4; }
+    .gfoto img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s ease; }
+    .gfoto:hover img { transform: scale(1.06); }
+    .gfoto-overlay {
+      position: absolute; inset: 0; background: rgba(27,52,16,0);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .3s;
+    }
+    .gfoto-overlay svg { opacity: 0; transition: opacity .3s; color: white; width: 32px; height: 32px; }
+    .gfoto:hover .gfoto-overlay { background: rgba(27,52,16,.35); }
+    .gfoto:hover .gfoto-overlay svg { opacity: 1; }
+
+    /* FIX #14 — Lightbox */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 400;
+      background: rgba(0,0,0,.94);
+      align-items: center; justify-content: center;
+    }
+    #lightbox.open { display: flex; }
+    #lb-img { max-width: 88vw; max-height: 82vh; object-fit: contain; display: block; user-select: none; }
+    .lb-btn {
+      position: absolute; background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,.7); font-size: 2rem; line-height: 1;
+      padding: 1rem; transition: color .2s;
+    }
+    .lb-btn:hover { color: #fff; }
+    .lb-close { top: 1rem; right: 1rem; font-size: 1.6rem; }
+    .lb-prev  { left: 1rem; top: 50%; transform: translateY(-50%); font-size: 2.8rem; }
+    .lb-next  { right: 1rem; top: 50%; transform: translateY(-50%); font-size: 2.8rem; }
+
+    /* ─── OPINIONES ─── */
+    #opiniones { background: var(--white); }
+    .opiniones-header { display: grid; grid-template-columns: 1fr auto; align-items: end; margin-bottom: 4rem; gap: 1rem; }
+    .google-badge { display: flex; align-items: center; gap: .8rem; padding: .8rem 1.4rem; border: 1.5px solid rgba(27,52,16,.15); opacity: 0; transform: translateX(20px); }
+    .google-badge .g-num { font-family: 'Abril Fatface', serif; font-size: 2.2rem; color: var(--green); line-height: 1; }
+    .google-badge .g-stars { color: var(--amber); font-size: .9rem; }
+    .google-badge .g-sub { font-size: .65rem; color: var(--muted); letter-spacing: .08em; }
+    .citas { display: flex; flex-direction: column; gap: 3rem; }
+    .cita { display: grid; grid-template-columns: auto 1fr; gap: 2.5rem; align-items: start; padding-bottom: 3rem; border-bottom: 1px solid rgba(26,20,8,.08); opacity: 0; transform: translateX(-28px); }
+    .cita:last-child { border-bottom: none; padding-bottom: 0; }
+    .cita-comilla { font-family: 'Abril Fatface', serif; font-size: 5rem; color: var(--amber); line-height: .7; user-select: none; }
+    .cita-texto { font-family: 'Lora', serif; font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.75; color: var(--text); font-style: italic; margin-bottom: 1rem; }
+    .cita-autor { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--green); font-weight: 600; font-family: 'Nunito', sans-serif; }
+    .cita-fuente { font-size: .65rem; color: var(--muted); margin-top: .15rem; }
+    .cita-estrellas { color: var(--amber); font-size: .85rem; margin-bottom: .5rem; }
+
+    /* ─── CONTACTO ─── */
+    #contacto { background: var(--green); display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; align-items: start; }
+    .info-contacto { padding-top: 1rem; }
+    .dato { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 2rem; opacity: 0; transform: translateX(-24px); }
+    .dato-icono { width: 40px; height: 40px; border: 1px solid rgba(212,144,48,.3); display: flex; align-items: center; justify-content: center; color: var(--amber-lt); font-size: .9rem; flex-shrink: 0; }
+    .dato-label { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(253,249,241,.35); margin-bottom: .2rem; }
+    .dato-valor { font-size: .95rem; color: var(--white); text-decoration: none; transition: color .25s; line-height: 1.5; display: block; }
+    .dato-valor:hover { color: var(--amber-lt); }
+    .hora-row { display: flex; gap: 1rem; margin-bottom: .3rem; flex-wrap: wrap; }
+    .hora-dia  { font-size: .8rem; color: rgba(253,249,241,.4); min-width: 90px; }
+    .hora-hora { font-size: .8rem; color: rgba(253,249,241,.75); }
+    .hora-cerrado { font-size: .8rem; color: var(--amber); }
+    .horario-bloque { margin-top: .2rem; }
+    .ig-link { display: inline-flex; align-items: center; gap: .5rem; font-size: .9rem; color: var(--white); text-decoration: none; margin-top: .2rem; transition: color .25s; }
+    .ig-link:hover { color: var(--amber-lt); }
+    .caja-reserva { background: var(--white); padding: 3rem; opacity: 0; transform: translateX(24px); }
+    .caja-reserva .titulo { font-size: 2rem; }
+    .caja-reserva > p { font-size: .88rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.65; }
+    .campo { margin-bottom: 1rem; }
+    .campo label { display: block; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: .4rem; }
+    .campo input, .campo select, .campo textarea { width: 100%; background: var(--cream); border: 1.5px solid rgba(26,20,8,.12); color: var(--text); padding: .8rem 1rem; font-size: .88rem; font-family: 'Nunito', sans-serif; outline: none; transition: border-color .25s; }
+    .campo input:focus, .campo select:focus, .campo textarea:focus { border-color: var(--amber); }
+    .campo select option { background: var(--white); }
+    .fila-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    /* FIX #15 — feedback de formulario */
+    .form-ok { display: none; padding: .8rem 1rem; background: rgba(27,52,16,.08); color: var(--green); font-size: .82rem; font-weight: 600; text-align: center; margin-bottom: .8rem; border: 1px solid rgba(27,52,16,.15); }
+    .btn-enviar { width: 100%; background: var(--green); color: var(--cream); border: none; padding: 1rem; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; cursor: pointer; font-family: 'Nunito', sans-serif; transition: background .25s, transform .2s; margin-top: .4rem; }
+    .btn-enviar:hover { background: var(--green-2); transform: translateY(-1px); }
+
+    /* ─── MAPA ─── */
+    #mapa { padding: 0; height: 420px; position: relative; overflow: hidden; }
+    .mapa-card { position: absolute; top: 50%; left: 4vw; transform: translateY(-50%); z-index: 10; background: var(--white); border-left: 4px solid var(--amber); padding: 2.2rem; max-width: 300px; box-shadow: 0 8px 40px rgba(26,20,8,.15); }
+    .mapa-card h3 { font-family: 'Lora', serif; font-size: 1.5rem; color: var(--green); margin-bottom: .4rem; }
+    .mapa-card p { font-size: .83rem; color: var(--muted); margin-bottom: 1.2rem; line-height: 1.6; }
+    .mapa-card a { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); text-decoration: none; font-weight: 600; border-bottom: 1px solid rgba(184,112,24,.3); padding-bottom: .15rem; transition: border-color .25s; }
+    .mapa-card a:hover { border-color: var(--amber); }
+    #mapa iframe { width: 100%; height: 100%; border: none; filter: grayscale(20%) contrast(1.05) brightness(.95); }
+
+    /* ─── FOOTER ─── */
+    footer { background: var(--green); border-top: 3px solid var(--amber); padding: 4rem 4vw 2.5rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
+    .footer-marca h2 { font-family: 'Abril Fatface', serif; font-size: 2rem; color: var(--amber-lt); margin-bottom: .5rem; }
+    .footer-marca p { font-size: .83rem; color: rgba(253,249,241,.35); line-height: 1.7; max-width: 260px; }
+    .footer-ig { display: inline-flex; align-items: center; gap: .4rem; font-size: .78rem; color: rgba(253,249,241,.45); text-decoration: none; margin-top: 1rem; transition: color .25s; }
+    .footer-ig:hover { color: var(--amber-lt); }
+    .footer-col h4 { font-size: .62rem; letter-spacing: .24em; text-transform: uppercase; color: var(--amber-lt); margin-bottom: 1.2rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: .55rem; }
+    .footer-col ul li a { font-size: .83rem; color: rgba(253,249,241,.4); text-decoration: none; transition: color .25s; }
+    .footer-col ul li a:hover { color: rgba(253,249,241,.75); }
+    .footer-bottom { border-top: 1px solid rgba(253,249,241,.08); padding-top: 1.8rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: .72rem; color: rgba(253,249,241,.22); }
+
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      .nav-links, .nav-tel { display: none; }
+      .hamburger { display: flex; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { min-height: 40vh; }
+      #nosotros { grid-template-columns: 1fr; }
+      .galeria-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gfoto { grid-column: auto !important; height: 220px; }
+      #contacto { grid-template-columns: 1fr; }
+      .opiniones-header { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .cita { gap: 1.5rem; }
+      .carta-header { grid-template-columns: 1fr; }
+      .carta-subtitulo { text-align: left; }
+    }
+    @media (max-width: 600px) {
+      .fila-2 { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .galeria-grid { grid-template-columns: 1fr; }
+      .gfoto { height: 200px; }
+      .hero-name { font-size: clamp(3rem, 12vw, 5rem); }
+      .menu-dia-inner { flex-direction: column; }
+      .cita { grid-template-columns: 1fr; }
+      .cita-comilla { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#hero" class="nav-logo">
+      <span class="nav-logo-name">La Allandesa</span>
+      <span class="nav-logo-tag">Sidrería · Gijón</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#carta">La carta</a></li>
+      <li><a href="#opiniones">Opiniones</a></li>
+      <li><a href="#contacto">Reservas</a></li>
+    </ul>
+    <a href="tel:985622667" class="nav-tel">☎ 985 62 26 67</a>
+    <button class="hamburger" id="ham" aria-label="Abrir menú" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mob-menu" id="mobMenu">
+    <ul>
+      <li><a href="#nosotros"  onclick="closeMenu()">Nosotros</a></li>
+      <li><a href="#carta"     onclick="closeMenu()">La carta</a></li>
+      <li><a href="#opiniones" onclick="closeMenu()">Opiniones</a></li>
+      <li><a href="#contacto"  onclick="closeMenu()">Reservas</a></li>
+    </ul>
+    <a href="tel:985622667" class="mob-tel">985 62 26 67</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-location">Sidrería · Gijón · Asturias</p>
+      <h1 class="hero-name">Sidrería<span> La Allandesa</span></h1>
+      <p class="hero-desc">Cocina asturiana de verdad en Gijón-Oeste. Cachopo, pulpo a la brasa, pescados del Cantábrico y postres caseros que saben como siempre.</p>
+      <div class="hero-score">
+        <span class="stars">★★★★★</span>
+        <span class="num">4,6</span>
+        <span class="cnt">· 1.334 opiniones en Google</span>
+      </div>
+      <div class="hero-btns">
+        <a href="tel:985622667" class="btn-dark">Reservar mesa</a>
+        <a href="#carta" class="btn-border">Ver la carta</a>
+      </div>
+    </div>
+    <!-- FIX #9 — <img> en vez de background-image CSS -->
+    <div class="hero-right">
+      <img src="fotos/local.jpg" alt="Sidrería La Allandesa, Gijón" width="1200" height="800" loading="eager" />
+    </div>
+  </section>
+
+  <!-- FRANJA -->
+  <div id="franja">
+    <div class="franja-item" data-reveal="up" data-group="franja">
+      <div class="franja-num" data-count="4.6" data-dec="1">4,6</div>
+      <div class="franja-label">★ Google</div>
+    </div>
+    <div class="franja-item" data-reveal="up" data-group="franja">
+      <div class="franja-num" data-count="1334">1.334</div>
+      <div class="franja-label">Opiniones</div>
+    </div>
+    <div class="franja-item" data-reveal="up" data-group="franja">
+      <div class="franja-num">14€</div>
+      <div class="franja-label">Menú del día</div>
+    </div>
+    <div class="franja-item" data-reveal="up" data-group="franja">
+      <div class="franja-num">1:00</div>
+      <div class="franja-label">Cierre · Excl. martes</div>
+    </div>
+  </div>
+
+  <!-- NOSOTROS -->
+  <section id="nosotros" class="sec">
+    <div class="nos-texto">
+      <span class="eyebrow" data-reveal="left">Nuestra historia</span>
+      <h2 class="titulo" data-reveal="left">Una sidrería<br>de barrio.</h2>
+      <div class="trazo" data-reveal="left"></div>
+      <p data-reveal="left">En La Allandesa nos conoces por el cachopo — ese que sale crujiente y calentito, relleno de jamón, queso y cebolla caramelizada. Pero también por el pote asturiano, la lubina al horno, los chipirones encebollados y el menú del día que por 14€ no tiene rival en el barrio.</p>
+      <p data-reveal="left">Estamos en Gijón-Oeste, en la Calle Luis Braille. Abrimos todos los días excepto los martes, que descansamos. Ven a comer, a cenar o a tomarte algo tranquilamente.</p>
+      <div class="nos-tags" data-reveal="left">
+        <span class="etiqueta">Cocina asturiana</span>
+        <span class="etiqueta">Pescados del Cantábrico</span>
+        <span class="etiqueta">Postres caseros</span>
+        <span class="etiqueta">Menú 14€</span>
+        <span class="etiqueta">Parrilla y sidra</span>
+      </div>
+    </div>
+    <!-- FIX #10 — width/height para evitar Layout Shift -->
+    <div class="nos-foto" data-reveal="right">
+      <img src="fotos/interior.jpg" alt="Interior de la Sidrería La Allandesa en Gijón" width="800" height="1000" loading="lazy" />
+    </div>
+  </section>
+
+  <!-- CARTA -->
+  <section id="carta" class="sec">
+    <div class="carta-header">
+      <div>
+        <span class="eyebrow">Lo que cocinamos</span>
+        <h2 class="titulo titulo-claro">La carta</h2>
+      </div>
+      <p class="carta-subtitulo">Llámanos para conocer<br>el menú del día de hoy</p>
+    </div>
+
+    <!-- FIX #1 — eliminado data-reveal de carta-categoria para evitar doble observer -->
+    <div class="carta-categoria">
+      <span class="cat-nombre">Para empezar</span>
+      <div class="plato-linea">
+        <div class="plato-info">
+          <span class="plato-nombre">Patatas tres salsas</span>
+          <span class="plato-detalle">Alioli · brava · mojo</span>
+        </div>
+      </div>
+      <div class="plato-linea">
+        <div class="plato-info">
+          <span class="plato-nombre">Chipirones encebollados</span>
+          <span class="plato-detalle">Frescos del día · salsa de cebolla</span>
+        </div>
+      </div>
+      <div class="plato-linea">
+        <div class="plato-info">
+          <span class="plato-nombre">Huevos rotos</span>
+          <span class="plato-detalle">Con lo que elijas</span>
+        </div>
+      </div>
+      <div class="plato-linea">
+        <div class="plato-info">
+          <span class="plato-nombre">Tabla de embutidos asturianos</span>
+          <span class="plato-detalle">Selección de la casa</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="carta-categoria">
+      <span class="cat-nombre">Nuestra parrilla</span>
+      <div class="plato-linea">
+        <div class="plato-info">
+          <span class="plato-nombre star">Cachopo de Ternera</span>
+          <span class="plato-detalle">Relleno de jamón, queso y cebolla caramelizada</span>
+        </div>
+      </div>
+      <div class="plato-linea">
+        <div class="plato-info">
+          <span class="plato-nombre">Cachopo de Cecina</span>
+          <span class="plato-detalle">Con queso de cabra</span>
+        </div>
+      </div>
+      <div class="plato-linea">
+        <div class="plato-info">
+          <span class="plato-nombre">Entrecot</span>
+          <span class="plato-detalle">En su punto</span>
+        </div>
+      </div>
+      <div class="plato-linea">
+        <div class="plato-info">
+          <span class="plato-nombre">Parrillada de carne</span>
+          <span class="plato-detalle">Con morcilla estilo leonesa</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIX #6 — "Pescados del Cantábrico" ahora solo tiene pescados reales -->
+    <div class="carta-categoria">
+      <span class="cat-nombre">Pescados del Cantábrico</span>
+      <div class="plato-linea">
+        <div class="plato-info">
+          <span class="plato-nombre star">Pulpo a la brasa</span>
+          <span class="plato-detalle">Gallego · en su punto</span>
+        </div>
+      </div>
+      <div class="plato-linea">
+        <div class="plato-info">
+          <span class="plato-nombre">Lubina</span>
+          <span class="plato-detalle">Según mercado · al horno o a la plancha</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIX #6 — nueva categoría para los guisos asturianos -->
+    <div class="carta-categoria">
+      <span class="cat-nombre">Cocina asturiana</span>
+      <div class="plato-linea">
+        <div class="plato-info">
+          <span class="plato-nombre">Pote asturiano</span>
+          <span class="plato-detalle">Col, patata y compango</span>
+        </div>
+      </div>
+      <div class="plato-linea">
+        <div class="plato-info">
+          <span class="plato-nombre">Fabada asturiana</span>
+          <span class="plato-detalle">Fabes de la granja · compango asturiano</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="carta-categoria">
+      <span class="cat-nombre">Postres caseros</span>
+      <div class="plato-linea">
+        <div class="plato-info">
+          <span class="plato-nombre">Tarta de limón</span>
+          <span class="plato-detalle">Elaborada en casa</span>
+        </div>
+      </div>
+      <div class="plato-linea">
+        <div class="plato-info">
+          <span class="plato-nombre">Flan y otros postres</span>
+          <span class="plato-detalle">Según disponibilidad del día</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENÚ DEL DÍA -->
+  <section id="menu-dia" class="sec">
+    <div class="menu-dia-inner" data-reveal="up">
+      <div>
+        <span class="eyebrow">De lunes a domingo · excepto martes</span>
+        <h2 class="titulo">Menú del día</h2>
+        <p>Primer plato, segundo y postre. Con bebida incluida. El favorito del barrio según nuestros clientes de Google.</p>
+        <a href="tel:985622667" class="btn-blanco">Preguntar el menú de hoy</a>
+      </div>
+      <div class="precio-grande">
+        <div class="precio-num">14€</div>
+        <div class="precio-label">por persona</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA -->
+  <!-- FIX #7 — alt texts variados y descriptivos -->
+  <div id="galeria">
+    <div class="galeria-grid">
+      <div class="gfoto">
+        <img src="fotos/plato1.jpg" alt="Especialidad de la casa, Sidrería La Allandesa" width="800" height="600" loading="lazy" />
+        <div class="gfoto-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg></div>
+      </div>
+      <div class="gfoto">
+        <img src="fotos/plato2.jpg" alt="Cachopo de ternera La Allandesa" width="600" height="600" loading="lazy" />
+        <div class="gfoto-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg></div>
+      </div>
+      <div class="gfoto">
+        <img src="fotos/plato3.jpg" alt="Pulpo a la brasa La Allandesa" width="600" height="600" loading="lazy" />
+        <div class="gfoto-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg></div>
+      </div>
+      <div class="gfoto">
+        <img src="fotos/plato4.jpg" alt="Cocina asturiana en La Allandesa" width="600" height="600" loading="lazy" />
+        <div class="gfoto-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg></div>
+      </div>
+      <div class="gfoto">
+        <img src="fotos/plato5.jpg" alt="Pescados del Cantábrico en La Allandesa" width="800" height="600" loading="lazy" />
+        <div class="gfoto-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg></div>
+      </div>
+      <div class="gfoto">
+        <img src="fotos/plato6.jpg" alt="Platos de temporada Sidrería La Allandesa" width="600" height="600" loading="lazy" />
+        <div class="gfoto-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX FIX #14 -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Galería de fotos">
+    <button class="lb-btn lb-close" onclick="closeLb()" aria-label="Cerrar">✕</button>
+    <button class="lb-btn lb-prev"  onclick="lbNav(-1)"  aria-label="Foto anterior">‹</button>
+    <img id="lb-img" src="" alt="" />
+    <button class="lb-btn lb-next"  onclick="lbNav(1)"   aria-label="Foto siguiente">›</button>
+  </div>
+
+  <!-- OPINIONES -->
+  <section id="opiniones" class="sec">
+    <div class="opiniones-header">
+      <div>
+        <span class="eyebrow" data-reveal="left">Lo que dicen</span>
+        <h2 class="titulo" data-reveal="left">Opiniones reales<br>de Google.</h2>
+      </div>
+      <div class="google-badge" data-reveal="right">
+        <div class="g-num">4,6</div>
+        <div>
+          <div class="g-stars">★★★★★</div>
+          <div class="g-sub">1.334 reseñas · Google Maps</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="citas">
+      <div class="cita" data-reveal="left" data-group="cita">
+        <div class="cita-comilla">"</div>
+        <div>
+          <div class="cita-estrellas">★★★★★</div>
+          <p class="cita-texto">Me pareció acogedor y la selección musical bastante placentera. El cachopo, delicioso — muy bien sazonado y crujiente, llegó a la mesa calentito y recién hecho. El pote asturiano, buenísimo. Definitivamente volveré.</p>
+          <div class="cita-autor">Arturo López</div>
+          <div class="cita-fuente">Google · Hace 5 meses · Menú del día, 14€</div>
+        </div>
+      </div>
+      <div class="cita" data-reveal="left" data-group="cita">
+        <div class="cita-comilla">"</div>
+        <div>
+          <div class="cita-estrellas">★★★★★</div>
+          <p class="cita-texto">Todo un descubrimiento recomendado por un amigo. Trato excelente, comida excelente, calidad precio inmejorable. Comimos chipirones encebollados, lubina, parrillada de carne y un cachopo de cecina con queso de cabra. Repetiremos sin duda.</p>
+          <div class="cita-autor">David Prieto</div>
+          <div class="cita-fuente">Google · Hace 5 meses</div>
+        </div>
+      </div>
+      <div class="cita" data-reveal="left" data-group="cita">
+        <div class="cita-comilla">"</div>
+        <div>
+          <div class="cita-estrellas">★★★★★</div>
+          <p class="cita-texto">El camarero Félix, 10/10. Muy atento y muy buena gente. Nos invitaron a entrantes típicos de Asturias, los huevos rotos que Félix rompió de una manera extraordinaria, y el entrecot en su punto con un sabor increíble. SITIO MUY RECOMENDABLE.</p>
+          <div class="cita-autor">Celeste Benitez Sanabria</div>
+          <div class="cita-fuente">Google · Hace 7 meses · Sin espera</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="sec">
+    <div class="info-contacto">
+      <span class="eyebrow">Encuéntranos</span>
+      <h2 class="titulo titulo-claro">Ven a<br>visitarnos.</h2>
+
+      <div class="dato" data-reveal="left" data-group="dato">
+        <div class="dato-icono">📍</div>
+        <div>
+          <div class="dato-label">Dirección</div>
+          <a href="https://maps.google.com/?q=Calle+Luis+Braille+28+Gijon" target="_blank" rel="noopener noreferrer" class="dato-valor">
+            Calle Luis Braille, 28<br>Gijón-Oeste · 33212 Gijón
+          </a>
+        </div>
+      </div>
+
+      <div class="dato" data-reveal="left" data-group="dato">
+        <div class="dato-icono">📞</div>
+        <div>
+          <div class="dato-label">Teléfono y reservas</div>
+          <a href="tel:985622667" class="dato-valor">985 62 26 67</a>
+        </div>
+      </div>
+
+      <!-- FIX #5 — horario real completo -->
+      <div class="dato" data-reveal="left" data-group="dato">
+        <div class="dato-icono">🕐</div>
+        <div>
+          <div class="dato-label">Horario</div>
+          <div class="horario-bloque">
+            <div class="hora-row"><span class="hora-dia">Lun</span><span class="hora-hora">11:00–16:30</span></div>
+            <div class="hora-row"><span class="hora-dia">Mié – Vie</span><span class="hora-hora">11:00–16:30 · 19:00–1:00</span></div>
+            <div class="hora-row"><span class="hora-dia">Sáb – Dom</span><span class="hora-hora">11:00–1:00</span></div>
+            <div class="hora-row"><span class="hora-dia">Martes</span><span class="hora-cerrado">Cerrado</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dato" data-reveal="left" data-group="dato">
+        <div class="dato-icono">🍽️</div>
+        <div>
+          <div class="dato-label">Menú del día</div>
+          <span class="dato-valor">14 € · incluye bebida</span>
+        </div>
+      </div>
+
+      <!-- FIX #8 — Instagram añadido -->
+      <div class="dato" data-reveal="left" data-group="dato">
+        <div class="dato-icono">📷</div>
+        <div>
+          <div class="dato-label">Instagram</div>
+          <a href="https://www.instagram.com/sidreria_la_allandesa/" target="_blank" rel="noopener noreferrer" class="ig-link dato-valor">@sidreria_la_allandesa</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="caja-reserva" data-reveal="right">
+      <h3 class="titulo">Reserva<br>tu mesa.</h3>
+      <p>Te mandamos la solicitud por WhatsApp. También puedes llamar directamente al <strong style="color:var(--amber)">985 62 26 67</strong>.</p>
+      <form onsubmit="enviarWA(event)">
+        <div class="fila-2">
+          <div class="campo"><label for="f-nombre">Nombre</label><input id="f-nombre" type="text" placeholder="Tu nombre" required /></div>
+          <div class="campo"><label for="f-tel">Teléfono</label><input id="f-tel" type="tel" placeholder="666 000 000" required /></div>
+        </div>
+        <div class="fila-2">
+          <div class="campo"><label for="f-fecha">Fecha</label><input id="f-fecha" type="date" required /></div>
+          <div class="campo">
+            <label for="f-personas">Comensales</label>
+            <select id="f-personas" required>
+              <option value="">Seleccionar</option>
+              <option>1 persona</option><option>2 personas</option><option>3 personas</option>
+              <option>4 personas</option><option>5 personas</option><option>6 personas</option>
+              <option>Más de 6 (grupo)</option>
+            </select>
+          </div>
+        </div>
+        <div class="campo"><label for="f-nota">Nota (opcional)</label><textarea id="f-nota" rows="2" placeholder="Menú del día, alergias, celebración…"></textarea></div>
+        <!-- FIX #15 — feedback de formulario -->
+        <div class="form-ok" id="form-ok">✓ Solicitud enviada — te confirmamos la reserva pronto</div>
+        <button type="submit" class="btn-enviar">Enviar por WhatsApp</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- MAPA -->
+  <div id="mapa">
+    <div class="mapa-card">
+      <h3>Gijón-Oeste</h3>
+      <p>Calle Luis Braille, 28 · 33212 Gijón<br>Abierto todos los días excepto martes.</p>
+      <a href="https://maps.google.com/?q=Calle+Luis+Braille+28,+33212+Gij%C3%B3n" target="_blank" rel="noopener noreferrer">Abrir en Google Maps →</a>
+    </div>
+    <iframe src="https://maps.google.com/maps?q=Calle+Luis+Braille+28,+33212+Gij%C3%B3n,+Asturias&output=embed&z=17" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Sidrería La Allandesa"></iframe>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-marca">
+        <h2>La Allandesa</h2>
+        <p>Sidrería y restaurante en Gijón. Cachopo, pulpo, pescados del Cantábrico y postres caseros. Abrimos todos los días excepto martes.</p>
+        <!-- FIX #8 — Instagram en el footer -->
+        <a href="https://www.instagram.com/sidreria_la_allandesa/" target="_blank" rel="noopener noreferrer" class="footer-ig">📷 @sidreria_la_allandesa</a>
+      </div>
+      <div class="footer-col">
+        <h4>Restaurante</h4>
+        <ul>
+          <li><a href="#nosotros">Nuestra historia</a></li>
+          <li><a href="#carta">La carta</a></li>
+          <li><a href="#menu-dia">Menú del día</a></li>
+          <li><a href="#opiniones">Opiniones</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="tel:985622667">985 62 26 67</a></li>
+          <li><a href="https://maps.google.com/?q=Calle+Luis+Braille+28+Gijon" target="_blank" rel="noopener noreferrer">C. Luis Braille, 28 · Gijón</a></li>
+          <li><a href="https://www.instagram.com/sidreria_la_allandesa/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="#contacto">Reservar mesa</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Sidrería La Allandesa · Gijón, Asturias</p>
+      <p>Diseño web profesional</p>
+    </div>
+  </footer>
+
+  <!-- FIX #13 — CTA fijo móvil -->
+  <div class="sticky-call">
+    <a href="tel:985622667">📞 &nbsp;Llamar · 985 62 26 67</a>
+  </div>
+
+  <script>
+    // ── Nav shadow on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('raised', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── Hero entrance
+    window.addEventListener('load', () => {
+      [
+        ['.hero-location', 150],
+        ['.hero-name',     400],
+        ['.hero-desc',     700],
+        ['.hero-score',    950],
+        ['.hero-btns',    1150],
+      ].forEach(([sel, delay]) => {
+        setTimeout(() => {
+          const el = document.querySelector(sel);
+          if (!el) return;
+          el.style.transition = 'opacity .8s ease, transform .8s ease';
+          el.style.opacity = '1';
+          el.style.transform = 'translateX(0)';
+        }, delay);
+      });
+    });
+
+    // ── FIX #11 — Observer único para todos los reveals
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const group = el.dataset.group;
+        let delay = 0;
+        if (group) {
+          const siblings = [...document.querySelectorAll(`[data-group="${group}"]`)];
+          delay = siblings.indexOf(el) * 110;
+        }
+        setTimeout(() => {
+          el.style.transition = 'opacity .8s ease, transform .8s ease';
+          el.style.opacity = '1';
+          el.style.transform = 'translateX(0) translateY(0)';
+        }, delay);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.08 });
+
+    // Setup inicial y registro en el único observer
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+      const dir = el.dataset.reveal;
+      el.style.opacity = '0';
+      el.style.transform = dir === 'right' ? 'translateX(28px)'
+                         : dir === 'left'  ? 'translateX(-28px)'
+                         : 'translateY(20px)';
+      io.observe(el);
+    });
+
+    // FIX #1 — carta-categoria solo en este observer (sin data-reveal para evitar doble suscripción)
+    const cartaIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const all = [...document.querySelectorAll('.carta-categoria')];
+        setTimeout(() => {
+          el.style.transition = 'opacity .8s ease, transform .8s ease';
+          el.style.opacity = '1';
+          el.style.transform = 'translateX(0)';
+        }, all.indexOf(el) * 120);
+        cartaIO.unobserve(el);
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.carta-categoria').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateX(-28px)';
+      cartaIO.observe(el);
+    });
+
+
+    // ── FIX #16 — nav active state con IntersectionObserver
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sectionIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    ['nosotros', 'carta', 'opiniones', 'contacto'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) sectionIO.observe(el);
+    });
+
+    // ── Contador animado
+    const countIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseFloat(el.dataset.count);
+        const dec    = parseInt(el.dataset.dec || '0');
+        const dur    = 1500;
+        const t0     = performance.now();
+        const tick = now => {
+          const p = Math.min((now - t0) / dur, 1);
+          const e = 1 - Math.pow(1 - p, 3);
+          el.textContent = dec > 0
+            ? (target * e).toFixed(dec).replace('.', ',')
+            : Math.round(target * e).toLocaleString('es-ES');
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        countIO.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-count]').forEach(el => countIO.observe(el));
+
+    // ── FIX #14 — Lightbox
+    const lbImgs = [...document.querySelectorAll('.gfoto img')];
+    let lbIdx = 0;
+    function openLb(idx) {
+      lbIdx = idx;
+      const img = document.getElementById('lb-img');
+      img.src = lbImgs[lbIdx].src;
+      img.alt = lbImgs[lbIdx].alt;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLb() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function lbNav(dir) {
+      lbIdx = (lbIdx + dir + lbImgs.length) % lbImgs.length;
+      const img = document.getElementById('lb-img');
+      img.src = lbImgs[lbIdx].src;
+      img.alt = lbImgs[lbIdx].alt;
+    }
+    document.querySelectorAll('.gfoto').forEach((el, i) => el.addEventListener('click', () => openLb(i)));
+    document.getElementById('lightbox').addEventListener('click', e => { if (e.target === e.currentTarget) closeLb(); });
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape')     closeLb();
+      if (e.key === 'ArrowLeft')  lbNav(-1);
+      if (e.key === 'ArrowRight') lbNav(1);
+    });
+
+    // ── Hamburger
+    function toggleMenu() {
+      const m = document.getElementById('mobMenu');
+      const b = document.getElementById('ham');
+      const open = m.classList.toggle('open');
+      b.classList.toggle('open', open);
+      b.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    function closeMenu() {
+      document.getElementById('mobMenu').classList.remove('open');
+      document.getElementById('ham').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ── Formulario → WhatsApp + FIX #15 feedback
+    function enviarWA(e) {
+      e.preventDefault();
+      const f = e.target;
+      const nombre   = document.getElementById('f-nombre').value.trim();
+      const tel      = document.getElementById('f-tel').value.trim();
+      const fecha    = document.getElementById('f-fecha').value;
+      const personas = document.getElementById('f-personas').value;
+      const nota     = document.getElementById('f-nota').value.trim();
+      const fechaFmt = fecha
+        ? new Date(fecha + 'T00:00:00').toLocaleDateString('es-ES', { weekday:'long', day:'numeric', month:'long' })
+        : '';
+      let msg = `Hola, quiero reservar en La Allandesa:\n\n👤 ${nombre}\n📞 ${tel}\n📅 ${fechaFmt}\n👥 ${personas}`;
+      if (nota) msg += `\n💬 ${nota}`;
+      msg += '\n\nGracias!';
+      window.open('https://wa.me/34985622667?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
+      f.reset();
+      const fb = document.getElementById('form-ok');
+      fb.style.display = 'block';
+      setTimeout(() => { fb.style.display = 'none'; }, 5000);
+    }
+
+    // ── Fecha mínima = hoy
+    const di = document.getElementById('f-fecha');
+    if (di) di.min = new Date().toISOString().split('T')[0];
+  </script>
+</body>
+</html>
